@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+  <head>
+    <!-- Mobile Specific Meta -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/fav.jpg" />
+    <!-- Author Meta -->
+    <meta name="author" content="colorlib" />
+    <!-- Meta Description -->
+    <meta name="description" content="" />
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="" />
+    <!-- meta character set -->
+    <meta charset="UTF-8" />
+    <!-- Site Title -->
+    <title>PolimeterNP</title>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"
+    ></script>
+
+    <script type="text/javascript" src="js/datatables.min.js"></script>
+    <script src="js/jquery.dataTables.yadcf.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/jquery.dataTables.polimeterNP.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/jquery.dataTables.yadcf.polimeterNP.css"
+    />
+
+    <link
+      href="https://use.fontawesome.com/releases/v5.0.4/css/all.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+    />
+  </head>
+
+  <body>
+    <header id="header" id="home">
+      <div class="container">
+        <div class="row align-items-center justify-content-between d-flex">
+          <div id="logo">
+            <a href="#"
+              ><img
+                src="img/fav.jpg"
+                class="rounded-circle"
+                width="40"
+                height="40"
+                alt=""
+                title=""
+            /></a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- #header -->
+
+    <!-- Start banner Area - template -->
+    <section class="section-gap">
+      <div
+        class="container-fluid text-center"
+        style="background-color: rgb(17, 121, 206); color: #38003c;"
+      >
+        <h3>Members of parliament list - Nepal</h3>
+        <a
+          class="fab fa-facebook-square btn"
+          style="font-size: 24px; color: #38003c;"
+          href="#"
+          target="_blank"
+          role="button"
+        ></a>
+        <a
+          class="fab fa-twitter-square btn"
+          style="font-size: 24px; color: #38003c;"
+          href="https://twitter.com/polimeternp"
+          target="_blank"
+          role="button"
+        ></a>
+      </div>
+    </section>
+    <!-- End banner Area - template -->
+
+    <!-- Start testomial Area -->
+    <section class="testomial-area">
+      <div class="container">
+        <div class="row d-flex justify-content-center">
+          <div class="container">
+            <table id="data-table" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>FirstName</th>
+                  <!--  <th>MiddleName</th>-->
+                  <th>LastName</th>
+                  <th>Gender</th>
+                  <th>Date_Of_Birth</th>
+                  <th>Marital_Status</th>
+                  <!-- <th>Spouse</th>-->
+                  <th>Children</th>
+                  <!-- <th>Address</th> -->
+                  <th>Education</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End testomial Area -->
+
+    <!-- start footer Area -->
+    <footer class="small-footer-gap">
+      <div
+        class="container-fluid"
+        style="background-color: #38003c; color: white;"
+      >
+        <p class="text-center">© polimeterNP.com 2020</p>
+      </div>
+    </footer>
+    <!-- End footer Area -->
+  </body>
+</html>
+
+<script>
+  $(document).ready(function () {
+    var myTable = $("#data-table").DataTable({
+      ajax: {
+        url:
+          "https://raw.githubusercontent.com/polimeterNP/Dev/master/db/polimeterNP_mock_50rows.json",
+        /*"url": "db/playerStatus.json",*/
+        dataSrc: "",
+      },
+      columns: [
+        { data: "FirstName" },
+        // { data: "MiddleName" },
+        { data: "LastName" },
+        { data: "Gender" },
+        { data: "DOB" },
+        { data: "Marital Status" },
+        // { data: "Spouse" },
+        { data: "NumberOfChildren" },
+        // { data: "Address" },
+        { data: "Education" },
+      ],
+
+      rowCallback: function (row, data, index) {
+        if (data.status === "Available") {
+          $("td:eq(4)", row).css("background-color", "#99ff9c");
+        }
+        if (data.status === "NotAvail") {
+          $("td:eq(4)", row).css("background-color", "#999999");
+        }
+        if (data.status === "Doubtful") {
+          $("td:eq(4)", row).css("background-color", "#ffff00");
+        }
+        if (data.status === "Injured") {
+          $("td:eq(4)", row).css("background-color", "#ff0000");
+        }
+      },
+    });
+
+    yadcf.init(myTable, [
+      //{ column_number: 0, filter_type: "auto_complete" },
+      //{ column_number: 1 },
+      { column_number: 2 },
+      //{ column_number: 3 },
+      { column_number: 4 },
+      //{ column_number: 5 },
+      { column_number: 5, filter_type: "range_number_slider" },
+      //{ column_number: 7, filter_type: "range_number_slider" },
+      //{ column_number: 8, filter_type: "range_number_slider" },
+      { column_number: 6 },
+    ]);
+  });
+</script>
